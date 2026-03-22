@@ -79,10 +79,10 @@
 
 <script>
 
-// 📅 STARTDATUM = erster Tag der Geburtstagswoche
+// 📅 STARTDATUM
 const startDate = new Date("2026-03-22");
 
-// 💌 7 Nachrichten (eine pro Tag)
+// 💌 Nachrichten (Tag 7 = alte Tag 3 Message)
 const messages = [
 `Tag 1.
 Deine Woche beginnt –
@@ -95,9 +95,9 @@ Du bist nicht nur besonders.
 Du bist mein Lieblingsmensch.`,
 
 `Tag 3.
-Dein Geburtstag.
-Und alles, was ich sagen will:
-Ich bin einfach unglaublich froh, dich zu haben ❤️`
+Mit dir fühlt sich alles leichter an.
+Als würde die Welt kurz stillstehen,
+nur damit wir sie genießen können.`,
 
 `Tag 4.
 Manchmal reicht ein Gedanke an dich,
@@ -110,30 +110,31 @@ dass ich es nicht will.`,
 
 `Tag 6.
 Du bist mein Ruhepunkt.
-Mein fernes Zuhause.`,
+Mein Chaos-Ausgleich.
+Mein Zuhause.`,
 
 `Tag 7.
 Mit dir fühlt sich alles leichter an.
 Als würde die Welt kurz stillstehen,
-nur damit wir sie genießen können.`,
+nur damit wir sie genießen können.`
 ];
 
-// 📸 Bilder pro Tag (WICHTIG: Bilder ins Repo hochladen!)
+// 📸 PNG Bilder
 const images = [
-  "tag1.jpg",
-  "tag2.jpg",
-  "tag3.jpg",
-  "tag4.jpg",
-  "tag5.jpg",
-  "tag6.jpg",
-  "tag7.jpg"
+  "tag1.png",
+  "tag2.png",
+  "tag3.png",
+  "tag4.png",
+  "tag5.png",
+  "tag6.png",
+  "tag7.png"
 ];
 
 const today = new Date();
 const diffTime = today - startDate;
 let dayCount = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1;
 
-// 🔒 Begrenzung auf 7 Tage
+// 🔒 Begrenzung
 if (dayCount < 1) dayCount = 1;
 if (dayCount > 7) dayCount = 7;
 
@@ -141,11 +142,11 @@ if (dayCount > 7) dayCount = 7;
 document.getElementById("day").innerText =
   "Tag " + dayCount + " deiner Geburtstagswoche ❤️";
 
-// 💌 Nachricht anzeigen
+// 💌 Nachricht
 document.getElementById("message").innerText =
   messages[dayCount - 1];
 
-// 📸 Bild anzeigen
+// 📸 Bild
 document.getElementById("dayImage").src =
   images[dayCount - 1];
 
