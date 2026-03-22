@@ -14,26 +14,8 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+    overflow: hidden;
   }
-
-  .heart {
-  position: fixed;
-  bottom: -10px;
-  font-size: 20px;
-  animation: floatUp 6s linear infinite;
-  opacity: 0.7;
-}
-
-@keyframes floatUp {
-  0% {
-    transform: translateY(0) scale(1);
-    opacity: 0.7;
-  }
-  100% {
-    transform: translateY(-100vh) scale(1.5);
-    opacity: 0;
-  }
-}
 
   .card {
     background: rgba(255,255,255,0.9);
@@ -44,6 +26,13 @@
     width: 85%;
     max-width: 350px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    z-index: 2;
+  }
+
+  img {
+    width: 100%;
+    border-radius: 15px;
+    margin-bottom: 15px;
   }
 
   h1 {
@@ -61,6 +50,7 @@
     font-size: 18px;
     margin: 20px 0;
     min-height: 60px;
+    transition: opacity 0.5s;
   }
 
   button {
@@ -76,16 +66,48 @@
   button:active {
     transform: scale(0.95);
   }
+
+  .hint {
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 10px;
+  }
+
+  /* ❤️ Herzen */
+  .heart {
+    position: fixed;
+    bottom: -10px;
+    font-size: 20px;
+    animation: floatUp 6s linear infinite;
+    opacity: 0.7;
+  }
+
+  @keyframes floatUp {
+    0% {
+      transform: translateY(0) scale(1);
+      opacity: 0.7;
+    }
+    100% {
+      transform: translateY(-100vh) scale(1.5);
+      opacity: 0;
+    }
+  }
 </style>
 </head>
 
 <body>
 
 <div class="card">
-  <h1>💌 Für dich</h1>
+  <!-- 📸 OPTIONAL: Bild hier einsetzen -->
+  <img src="deinbild.jpg">
+
+  <h1>💌 Für dich ❤️</h1>
   <div class="day" id="day"></div>
   <p id="message"></p>
+
   <button onclick="newMessage()">Noch eine ❤️</button>
+
+  <p class="hint">(psst… drück öfter 😉)</p>
 </div>
 
 <script>
@@ -99,26 +121,51 @@ const messages = [
   "Ich würde dich immer wieder wählen",
   "Du bist mein Zuhause ❤️",
   "Ich denke an dich 😊",
-  "Du bist einfach perfekt für mich"
+  "Du bist einfach perfekt für mich",
+  "Mit dir ist alles leichter ❤️",
+  "Ich freu mich jedes Mal dich zu sehen 🥰"
 ];
 
-// Tag berechnen (z.B. seit Geburtstag)
-const startDate = new Date("2026-03-22"); // <- HIER ggf. ändern
+// 📅 Startdatum anpassen!
+const startDate = new Date("2026-03-22");
 const today = new Date();
 const diffTime = today - startDate;
 const dayCount = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1;
 
-document.getElementById("day").innerText = "Tag " + dayCount;
+document.getElementById("day").innerText = "Tag " + dayCount + " mit dir ❤️";
 
-// Tagesnachricht
+// 💌 Tagesnachricht
 const dailyMessage = messages[dayCount % messages.length];
 document.getElementById("message").innerText = dailyMessage;
 
-// Button → zufällige Nachricht
+// 🔄 Neue Nachricht mit Animation
 function newMessage() {
-  const random = messages[Math.floor(Math.random() * messages.length)];
-  document.getElementById("message").innerText = random;
+  const el = document.getElementById("message");
+  el.style.opacity = 0;
+
+  setTimeout(() => {
+    const random = messages[Math.floor(Math.random() * messages.length)];
+    el.innerText = random;
+    el.style.opacity = 1;
+  }, 300);
 }
+
+// ❤️ Herzen generieren
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerText = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (15 + Math.random() * 20) + "px";
+
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 6000);
+}
+
+setInterval(createHeart, 800);
 </script>
 
 </body>
